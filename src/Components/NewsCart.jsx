@@ -1,8 +1,9 @@
 import { FaEye, FaRegBookmark, FaShareAlt } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const { title, rating, total_view, author, thumbnail_url, details } = news;
+  const {id, title, rating, total_view, author, thumbnail_url, details } = news;
 
   // Format date using native Intl API
   const formatDate = (dateString) => {
@@ -58,19 +59,19 @@ const NewsCard = ({ news }) => {
         <p className="text-sm text-gray-600 text-justify">
           {details.length > 200 ? details.slice(0, 200) + "..." : details}
         </p>
-        <button className="link link-primary text-sm mt-1 flex justify-start text-secondary">
+        <Link to={`/news-details/${id}`} className="link link-primary text-sm mt-1 flex justify-start text-secondary">
           Read More
-        </button>
+        </Link>
       </div>
 
       {/* Footer */}
       <div className="flex justify-between items-center px-4 pb-4">
-        <div className="flex items-center gap-1 text-orange-500">
+        <div className="flex items-center gap-1 text-secondary">
           {Array.from({ length: 5 }).map((_, idx) => (
             <AiFillStar
               key={idx}
               className={
-                idx < rating.number ? "text-orange-500" : "text-gray-300"
+                idx < rating.number ? "text-secondary" : "text-gray-300"
               }
             />
           ))}
